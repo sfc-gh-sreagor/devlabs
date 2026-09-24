@@ -1,93 +1,147 @@
-# Snowflake Devlabs
-
-[![Demo](https://storage.googleapis.com/claat/demo.png)](https://storage.googleapis.com/claat/demo.mp4)
-
-## What are Devlabs?
-Devlabs are interactive tutorials and self-serve demos written in markdown syntax. Devlabs provide a unique step-by-step reading experience and automatically saves tutorial progress for readers. These tutorials are published at [developers.snowflake.com/devlabs](developers.snowflake.com/devlabs)
-
-You can submit your own devlab to be published on Snowflake's website by submitting a pull request to this repo. This repository contains all the tools and documentation you’ll need for building, writing, and submitting your own devlabs!
+# Snowflake Guides
 
 
-## What's special about the Devlab format?
+## What are Snowflake Guides?
+Snowflake Guides serves as a collection of what previously were "Snowflake Quickstarts" and "Snowflake Solutions Center" along with some new additional types of content.  
+
+Guides are interactive tutorials and self-serve demos written in markdown syntax. Guides provide a unique step-by-step reading experience and automatically saves tutorial progress for readers. These tutorials are published at: [https://www.snowflake.com/en/developers/guides/](https://www.snowflake.com/en/developers/guides/)
+
+You can submit your own Guides to be published on Snowflake's website by submitting a pull request to this repo. This repository contains all the tools and documentation you’ll need for building, writing, and submitting your own Guide. 
+
+
+## What You Should Know About Snowflake Guides
 
 * Powerful and flexible authoring flow in Markdown text
 * Ability to produce interactive web or markdown tutorials without writing any code
-* Easy interactive previewing
-* Usage monitoring via Google Analytics
-* Support for multiple target environments or events (conferences, kiosk, web, offline, etc.)
+* Easy interactive previewing (using GitHub or Visual Studio Code preview feature)
 * Support for anonymous use - ideal for public computers at developer events
-* Looks great, with a responsive web implementation
-* Remembers where the student left off when returning to a codelab
-* Mobile friendly user experience
+* Looks great, with web implementation on snowflake.com
+* Anchors to content to make it easy to scroll on a single page
 
-## How to get started
+> Please note that the DevRel team has a 24 business hour SLA for approving PRs. Please do not post in #devrel to notify the team of submissions or send DMs unless the 24 hours have passed. Please note there will be delays during US holidays.  
 
-  1. nodejs & npm ([Install NodeJS & npm](https://nodejs.org/en/download/))
-  2. install gulp-cli:
-   ````bash
-   npm install --global gulp-cli
-   ````
-  3. install Golang ([Install Go](https://golang.org/doc/install))
-  4. install claat:
-   ````bash
-   go get github.com/googlecodelabs/tools/claat
-   ````
-  5. navigate to the site directory:
-   ````bash
-   cd site/
-   ````
-  6. install dependencies:
-   ````bash
-   npm install
-   ````
-  7. run the site locally
-   ````bash
-   gulp serve
-   ````
+## Getting Started
 
-Congratulations! You now have the DevLabs landing page running.
+### Prerequisites
 
-#### Now lets add our first devlab:
+  1. A GitHub account
+  2. [Optional] A code editor (e.g. VS Code) if you choose to publish or make changes through your local environment
 
-  1. Terminate the running gulp server with `ctrl C` and navigate to the devlab directory
-  ````bash
-  cd site/devlabs
-  ````
-  The devlabs directory is where to store all devlab content, written in markdown.
-  
-  2. Use the claat tool to convert the markdown file to HTML
-  ````bash
-  claat export sample.md
-  ````
 
-  You should see `ok sample` as the response. This means claat has successfully converted your .md file to HTML and created a new directory named `sample`.
+### Create a New Guide on GitHub.com
+1. Fork this repository to your GitHub account (top right of webpage, `fork` button)
+   > If you have already forked the repository, you can go to your branch and select 'sync fork' to update the repository
+2. In your fork, select the 'site' folder on the home page -> Then select the 'sfguides/src' folder.
+   > Ensure you are in your local branch and the path on your page is 'sfquickstarts/site/sfguides/src/'
+
+3. Click "Add file" --> "Create new file" 
+4. In the "Name your file" field, type your new folder name followed by a "/", then a file name inside it that ends in '.md'.
+   Example: my-guide/my-guide.md <br>
+   - Please ensure both of the folder name and the markdown file names match exactly (these are case sensitive) <br>
+   - Please use hyphens,  no underscores <br>
+   - Ensure your folder uses lower case alphabets and "Hyphens (-)" and not "Underscores(_)" in folder name <br>
+
+5. Start authoring in markdown format using the template housed under site -> sfguides/src -> _markdown-template -> markdown-template.md. Select the 'preview' button at the top left to see a preview of your guide.
+   - Required fields: language, category tags, id, author name, status (leave this as published) <br>
+   - Optional Fields: summary, environments, feedback link, fork repo link, open in Snowflake
+   Commit your changes in a branch and name it.  Example:  Test-demo-branch
    
-  3. Now lets run our server again, this time specifying our devlabs directory of content
-   ````bash
-   gulp serve --codelabs-dir=devlabs
-   ````
-You can now navigate to the landing page in your browser to see your new codelab!
+6. To submit related assets with your guide, go back to your fork.  
+   - You **DO NOT** need to request a merge to add additional files.  
+   - In your fork, find your branch you just made in step 5.   
 
-You can use the [sample devlab](site/devlabs/sample.md) as a template, just change the name of the file and the id listed in the header. 
+    ![Go to Your Fork and Branch](site/sfguides/src/_shared_assets/your-fork-branch.png)
 
-### Tips
+   
+   - Create an 'assets/' subfolder under your existing guide folder and add a "readme.md" file as a placeholder so the folder is created. GitHub requires a file to be added to a folder to create it. 
+    Example: my-guide/assets/readme.md
+   - It is recommended not to create further sub-folders within 'assets' <br>
+   - Please be mindful of image requirements noted [here](https://www.snowflake.com/en/developers/guides/get-started-with-guides/#formatting-considerations). Image size must be less than 1MB. <br>
+   - You can add demo files and other .sql files in the "/assets" folder as well if needed.
+**Separate Repos:** Instead of creating separate repos and requesting them to be public, your demo files and content can be placed in "/assets" folder where images are placed. Non image files can now be larger than 1MB as well.
+> Note: Please review the [OSS Policy](https://lift.snowflake.com/lift?id=kb_article&table=kb_knowledge&sysparm_article=KB0013458&searchTerm=open%20source%20policy) to ensure you are in accordance with guidelines for demo data. Separate repos created for demos that need to be made public, will need to go through legal reviews outlined in the policy before the request is made to DevRel.
+     
+7. Select Commit your changes to the branch (same one you created in Step 5) and click "Compare & pull request" button on the top. 
+8. On the next page, in the light gray box at the top of the page ensure 'base repository:' is set to 'base: Snowflake-Labs/sfquickstarts'.  The 'head repository:' should be set to your fork name and "compare:" should be set to your branch you created in Step 5.  Compare your changes made on your branch to the main repository. 
 
-- Review the [sample.md](site/devlabs/sample.md) file to learn more about to to structure your devlab for the claat tool. 
-- You can also see more formating information in the [claat documentation](claat/README.md), and use the command `claat -h`
-- You can see the supported devlab categories [here](site/app/styles/_overrides.scss). If you want to suggest a new category please create a github issue!
 
-If you want to learn more about devlabs, check out this [excellent tutorial](https://medium.com/@zarinlo/publish-technical-tutorials-in-google-codelab-format-b07ef76972cd)
+![Comparing branches](site/sfguides/src/_shared_assets/comparing-branch.png)
 
-## How do I publish my Devlab to developers.snowflake.com?
+9. Update the name and optionally add a description to your request. Create the pull request.
+    > Note: It is recommended to create a draft pull request, run all your checks, then mark as ready for review, so we know it's ready to merge immediately.
 
-1. You will need to sign Snowflake's CLA 
-2. Fork this repository
-3. Clone it to your local system
-4. Make a new branch
-5. Make your changes
-6. Push it back to your repo
-7. Open this repository on GitHub.com
-8. Click the Pull Request button to open a new pull request
-9. Snowflake will review and approve the submission
+**Please Note:** 
+All PRs have automated checks run against them. The checks assess for the following (please confirm these are met prior to submission): 
+1. Categories are applied from the [approved list](https://www.snowflake.com/en/developers/guides/get-started-with-guides/#language-and-category-tags)
 
-To learn more how to submit a pull request on GitHub in general, checkout github's [official documentation](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
+2. ID criteria (second line in template): id must exist, id must be separated by dashes, id must be lowercase, id must match the markdown file name (without .md extension), id must match the immediate folder name the file is in
+
+3. Language tag must be populated (see [here](https://www.snowflake.com/en/developers/guides/get-started-with-guides/#language-and-category-tags) for the list) 
+
+
+### Submit an Edit to an Existing Guide on GitHub.com
+1. Fork this repository to your GitHub account (top right of webpage, `fork` button)
+   > If you have already forked the repository, you can go to your branch and select 'sync fork' to update the repository before you start making changes.
+
+2. In your fork, select the 'site' folder on the home page -> Then select the 'sfguides/src' folder.
+
+3. In your fork, navigate to the folder for your guide.
+
+4. In the folder, select the markdown (.md) file. Select the pencil icon in the top right to edit the markdown file. Make your edits directly in the file and select the 'preview' button at the top left to see a preview of your guide. 
+
+5. Select 'Create a new branch for this commit and start a pull request.' Update the name of the of the branch
+
+6. On the next page, in the light gray box at the top of the page update from 'base: master' to 'base: Snowflake-Labs/sfquickstarts' to compare your changes made on your branch to the main repository. 
+
+7. Update the name and optionally add a description to your request. Create the pull request.
+    > Note: It is recommended to create a draft pull request, run all your checks, then mark as ready for review, so we know it's ready to merge immediately.
+
+Watch a demo [here](https://www.youtube.com/watch?v=yd9LXsvTSTU)
+
+### OPTIONAL: Local Environment Setup and Updates
+
+***Create a New Guide or Edit an Existing Guide Locally***
+
+> Please note this is for advanced users who are familiar with using Github on their local environment
+  
+  1. Fork this repository to your personal GitHub account (top right of webpage, `fork` button)
+  
+  2. Clone your new fork `git clone git@github.com:<YOUR-USERNAME>/sfquickstarts.git sfquickstarts`
+  
+  3. Navigate to the directory `cd sfquickstarts/site/src`
+  
+  4. Create a new branch `git checkout -b <your-branch-name>` (make sure you are working on a new branch and not on `master`!) 
+     If you need to synchronize your branch with your repo: `git push --set-upstream origin <your-branch-name>`
+  
+  6. Copy the template folder and rename it appropriately to create a new Guide: (e.g. `cp _markdown-template my-quickstart-name-here` in your terminal).
+     or Browse to the Guide you wish to edit, click the directory and edit the existing files in the directory
+ 
+  7. Start authoring in markdown format using the template housed under site -> sfguides/src -> _markdown-template -> [markdown-template](https://github.com/Snowflake-Labs/sfquickstarts/tree/master/site/sfguides/src/_markdown-template.md).
+  
+  8. Make sure you select the appropriate content type, industries, language and category tags from [the list in this Guide](https://www.snowflake.com/en/developers/guides/get-started-with-guides/#language-and-category-tags). You will not be able to merge your changes without this step!
+
+
+### Best Practices  
+ 
+- Review [Get Started with Guides](https://www.snowflake.com/en/developers/guides/get-started-with-guides/) to learn more about about the specifics.  It will give you details on formatting, layout, and requirements. 
+  
+- Guidance for labeling flow of the guide: Overview, Prerequisites, What You Will Build, What You Will Learn, What You Learned, Conclusion, Resources (e.g., links, docs, blogs, videos)
+
+- Search the current Quickstarts repository to confirm you are not duplicating content that is already created (consolidate your content where possible)
+
+- **Ctrl+Click** (Windows/Linux) or **Cmd+Click** (macOS) to open links in a new tab.  This is useful when following along instructions in a guide.
+
+## Reporting issues in Guides
+
+Guides are not in the scope of Snowflake Global Support. Please do not file support cases for issues or errata in a Guide. 
+
+However, pull requests are welcome! If you encounter an issue in a Guide (outdated copy or data, typos, broken links, etc.), please submit a pull request and contribute to keeping our Guides up to date and awesome. 
+
+Thank you for helping us maintain a high quality bar and consistency across all Snowflake Developer Guides!
+
+
+## Resources:
+
+- [How to Fork a Repo](https://youtu.be/ePRJHFXU6n4)
+- [How to Edit a Guide](https://youtu.be/yd9LXsvTSTU)
+- **Basic Guide with hands-on Instructions:** [Getting Started with Snowflake Intelligence](https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-intelligence/)
